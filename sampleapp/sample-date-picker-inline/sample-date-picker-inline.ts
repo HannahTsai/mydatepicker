@@ -16,7 +16,7 @@ export class SampleDatePickerInline implements OnInit {
         firstDayOfWeek: 'mo',
         sunHighlight: true,
         height: '34px',
-        width: '260px',
+        width: '300px',
         inline: true,
         disableUntil: {year: 0, month: 0, day: 0},
         disableDays: [{year: 0, month: 0, day: 0}]
@@ -26,6 +26,7 @@ export class SampleDatePickerInline implements OnInit {
     private selectedTextInline: string = '';
     private border: string = 'none';
     private locale:string = '';
+    public arrSelectedDates: [{year:number, month: number, day: number}];
 
     private locales:Array<string> = new Array('en', 'fr', 'ja', 'fi', 'es', 'hu', 'sv', 'nl', 'ru', 'no', 'tr', 'pt-br', 'de');
     
@@ -33,6 +34,7 @@ export class SampleDatePickerInline implements OnInit {
 
     ngOnInit() {
         console.log('onInit(): SampleDatePickerInline');
+        this.arrSelectedDates = [{year: 2016, month: 11, day: 30}];
     }
 
     onChangeLocale(locale:string) {
@@ -94,6 +96,12 @@ export class SampleDatePickerInline implements OnInit {
             this.selectedTextInline = '';
             this.border = 'none';
         }
+    }
+
+    onMultiDateChanged(event:any) {
+        console.log(event);
+        console.log('onMultiDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+        this.arrSelectedDates = event.date;
     }
 
     getCopyOfOptions() {

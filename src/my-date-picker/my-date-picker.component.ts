@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Eleme
 import { IMyDate, IMyMonth, IMyWeek, IMyDayLabels, IMyMonthLabels, IMyOptions } from "./interfaces/index";
 import { LocaleService } from "./services/my-date-picker.locale.service";
 import { ValidatorService } from "./services/my-date-picker.validator.service";
+import * as _ from "lodash";
 
 // webpack1_
 declare var require: any;
@@ -22,14 +23,17 @@ export class MyDatePicker implements OnChanges {
     @Input() locale: string;
     @Input() defaultMonth: string;
     @Input() selDate: string;
+    @Input() defaultSelectedDates:Array<IMyDate>= [];
     @Output() dateChanged: EventEmitter<Object> = new EventEmitter();
     @Output() inputFieldChanged: EventEmitter<Object> = new EventEmitter();
     @Output() calendarViewChanged: EventEmitter<Object> = new EventEmitter();
+    @Output() multiDateChanged:EventEmitter<Object> = new EventEmitter();
 
     showSelector: boolean = false;
     visibleMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
     selectedMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
     selectedDate: IMyDate = {year: 0, month: 0, day: 0};
+    selectedDateArray: Array<IMyDate>= [];
     weekDays: Array<string> = [];
     dates: Array<Object> = [];
     selectionDayTxt: string = "";
@@ -217,6 +221,9 @@ export class MyDatePicker implements OnChanges {
         if (changes.hasOwnProperty("defaultMonth")) {
             this.selectedMonth = this.parseSelectedMonth((changes["defaultMonth"].currentValue).toString());
         }
+        if (changes.hasOwnProperty("defaultSelectedDates")) {
+            this.selectedDateArray = changes["defaultSelectedDates"].currentValue;
+        }
 
         if (changes.hasOwnProperty("selDate")) {
             this.selectionDayTxt = changes["selDate"].currentValue;
@@ -340,6 +347,24 @@ export class MyDatePicker implements OnChanges {
         });
         this.inputFieldChanged.emit({value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: true});
         this.invalidDate = false;
+        this.makeMultiDateSelection(date);
+    }
+
+    makeMultiDateSelection(date:any){
+        if (_.some(this.selectedDateArray, date)) {
+            _.remove(this.selectedDateArray, date);
+        }
+        else {
+            this.selectedDateArray.push(Object.assign({}, date));
+        }
+        this.multiDateChanged.emit({date: this.selectedDateArray, formatted: this.selectionDayTxt, epoc: Math.round(this.getTimeInMilliseconds(this.selectedDate) / 1000.0)});
+    }
+
+    isInSelectedArray(date:IMyDate):boolean {
+        if (_.some(this.selectedDateArray, date)) {
+            return true;
+        }
+        return false;
     }
 
     preZero(val: string): string {

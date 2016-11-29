@@ -300,13 +300,6 @@
     border: none;
 }
 
-.mydp .btnpickerenabled:hover,
-.mydp .btnclearenabled:hover,
-.mydp .headertodaybtn:hover,
-.mydp .tablesingleday:hover {
-    background-color: #8BDAF4;
-}
-
 .mydp .monthlabel,
 .mydp .yearlabel {
     cursor: pointer;

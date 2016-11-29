@@ -28,7 +28,10 @@
     "test": "karma start config/karma.conf.js",
     "tslint": "gulp tslint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/lodash": "^4.14.39",
+    "lodash": "^4.17.2"
+  },
   "devDependencies": {
     "@angular/common": "~2.2.0",
     "@angular/compiler": "~2.2.0",

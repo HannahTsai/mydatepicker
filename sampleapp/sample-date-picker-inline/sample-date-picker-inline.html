@@ -43,6 +43,9 @@
     <div style="padding:4px;border-radius:4px;margin-bottom:8px;float:right" [ngStyle]="{border: border}">
         {{selectedTextInline}}
     </div>
-    <my-date-picker [options]="myDatePickerInlineOptions" (dateChanged)="onDateChanged($event)"
-                    [selDate]="selectedDateInline" [locale]="locale"></my-date-picker>
+    <div *ngFor="let d of arrSelectedDates" [ngStyle]="{border: border}">
+        {{d.month}}-{{d.day}}-{{d.year}} {{arrSelectedDates | json}}
+    </div>
+    <my-date-picker [options]="myDatePickerInlineOptions" [defaultSelectedDates]="arrSelectedDates" (multiDateChanged)="onMultiDateChanged($event)"
+        [selDate]="selectedDateInline" [locale]="locale"></my-date-picker>
 </div>

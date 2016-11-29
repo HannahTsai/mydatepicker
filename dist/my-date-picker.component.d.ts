@@ -12,13 +12,16 @@ export declare class MyDatePicker implements OnChanges {
     locale: string;
     defaultMonth: string;
     selDate: string;
+    defaultSelectedDates: Array<IMyDate>;
     dateChanged: EventEmitter<Object>;
     inputFieldChanged: EventEmitter<Object>;
     calendarViewChanged: EventEmitter<Object>;
+    multiDateChanged: EventEmitter<Object>;
     showSelector: boolean;
     visibleMonth: IMyMonth;
     selectedMonth: IMyMonth;
     selectedDate: IMyDate;
+    selectedDateArray: Array<IMyDate>;
     weekDays: Array<string>;
     dates: Array<Object>;
     selectionDayTxt: string;
@@ -54,6 +57,8 @@ export declare class MyDatePicker implements OnChanges {
     todayClicked(): void;
     cellClicked(cell: any): void;
     selectDate(date: any): void;
+    makeMultiDateSelection(date: any): void;
+    isInSelectedArray(date: IMyDate): boolean;
     preZero(val: string): string;
     formatDate(val: any): string;
     monthText(m: number): string;

@@ -1,16 +1,37 @@
-/*
-* Remove bolding of the fonts.
-*/
-.mydp .selection,
-.mydp .weekdaytitle,
-.mydp .monthinput,
-.mydp .yearinput {
-    font-weight: normal;
+.mydp .selectedday div {
+    border: 1px solid #59b8da;
+    background-color:#59b8da !important;
+    color: #ffffff;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
 }
 
-/*
-* Change color of the weekday font.
-*/
+.mydp .currday div {
+    border: 1px solid #004198;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+
 .mydp .weekdaytitle {
-    color: #000;
+    background-color: #394857;
+    color: #ffffff;
+}
+.mydp .currmonth {
+    background-color: #ffffff;
+}
+
+.mydp .selector, .mydp .header, .mydp .caltable tbody {
+    border: none;
+}
+
+.mydp .selector, .mydp .header {
+    background-color: transparent;
+}
+
+.mydp .headermonthtxt span, .mydp .headeryeartxt span, .mydp .headertodaybtn {
+    font-weight: bold;
 }
