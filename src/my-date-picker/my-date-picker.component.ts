@@ -24,6 +24,7 @@ export class MyDatePicker implements OnChanges {
     @Input() defaultMonth: string;
     @Input() selDate: string;
     @Input() defaultSelectedDates:Array<IMyDate>= [];
+    @Input() multiple: boolean;
     @Output() dateChanged: EventEmitter<Object> = new EventEmitter();
     @Output() inputFieldChanged: EventEmitter<Object> = new EventEmitter();
     @Output() calendarViewChanged: EventEmitter<Object> = new EventEmitter();
@@ -356,10 +357,15 @@ export class MyDatePicker implements OnChanges {
     }
 
     makeMultiDateSelection(date:any){
-        if (_.some(this.selectedDateArray, date)) {
-            _.remove(this.selectedDateArray, date);
-        }
-        else {
+        if (this.multiple) {
+            if (_.some(this.selectedDateArray, date)) {
+                _.remove(this.selectedDateArray, date);
+            }
+            else {
+                this.selectedDateArray.push(Object.assign({}, date));
+            }
+        } else {
+            this.selectedDateArray = [];
             this.selectedDateArray.push(Object.assign({}, date));
         }
         this.multiDateChanged.emit({date: this.selectedDateArray, formatted: this.selectionDayTxt, epoc: Math.round(this.getTimeInMilliseconds(this.selectedDate) / 1000.0)});

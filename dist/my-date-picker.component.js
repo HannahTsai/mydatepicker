@@ -304,10 +304,16 @@ var MyDatePicker = (function () {
         this.makeMultiDateSelection(date);
     };
     MyDatePicker.prototype.makeMultiDateSelection = function (date) {
-        if (_.some(this.selectedDateArray, date)) {
-            _.remove(this.selectedDateArray, date);
+        if (this.multiple) {
+            if (_.some(this.selectedDateArray, date)) {
+                _.remove(this.selectedDateArray, date);
+            }
+            else {
+                this.selectedDateArray.push(Object.assign({}, date));
+            }
         }
         else {
+            this.selectedDateArray = [];
             this.selectedDateArray.push(Object.assign({}, date));
         }
         this.multiDateChanged.emit({ date: this.selectedDateArray, formatted: this.selectionDayTxt, epoc: Math.round(this.getTimeInMilliseconds(this.selectedDate) / 1000.0) });
@@ -435,6 +441,10 @@ var MyDatePicker = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], MyDatePicker.prototype, "defaultSelectedDates", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], MyDatePicker.prototype, "multiple", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)

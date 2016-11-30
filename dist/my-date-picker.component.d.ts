@@ -13,6 +13,7 @@ export declare class MyDatePicker implements OnChanges {
     defaultMonth: string;
     selDate: string;
     defaultSelectedDates: Array<IMyDate>;
+    multiple: boolean;
     dateChanged: EventEmitter<Object>;
     inputFieldChanged: EventEmitter<Object>;
     calendarViewChanged: EventEmitter<Object>;
