@@ -15,7 +15,7 @@ export class SampleDatePickerNormal implements OnInit {
         dateFormat: 'dd mmm yyyy',
         firstDayOfWeek: 'mo',
         sunHighlight: true,
-        showCurrentDay: true,
+        markCurrentDay: true,
         height: '34px',
         width: '260px',
         selectionTxtFontSize: '18px',
@@ -24,7 +24,8 @@ export class SampleDatePickerNormal implements OnInit {
         showDateFormatPlaceholder: true,
         editableMonthAndYear: true,
         minYear: 1900,
-        componentDisabled: false
+        componentDisabled: false,
+        inputValueRequired: false
     };
     private selectedDateNormal:string = '';
 
@@ -37,9 +38,21 @@ export class SampleDatePickerNormal implements OnInit {
         this.selectedDateNormal = '';
     }
 
-    enableDisable() {
-        let copy = JSON.parse(JSON.stringify(this.myDatePickerNormalOptions));
-        copy.componentDisabled = !this.myDatePickerNormalOptions.componentDisabled;
+    onDisableComponent(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.componentDisabled = checked;
+        this.myDatePickerNormalOptions = copy;
+    }
+
+    onEditableDateField(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.editableDateField = checked;
+        this.myDatePickerNormalOptions = copy;
+    }
+
+    onShowTodayButton(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.showTodayBtn = checked;
         this.myDatePickerNormalOptions = copy;
     }
 
@@ -48,7 +61,7 @@ export class SampleDatePickerNormal implements OnInit {
     }
 
     onDateChanged(event:any) {
-        console.log('onDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+        console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
         if(event.formatted !== '') {
             this.selectedTextNormal = 'Formatted: ' + event.formatted + ' - epoc timestamp: ' + event.epoc;
             this.border = '1px solid #CCC';
@@ -67,5 +80,9 @@ export class SampleDatePickerNormal implements OnInit {
 
     onCalendarViewChanged(event:any) {
         console.log('onCalendarViewChanged(): Year: ', event.year, ' - month: ', event.month, ' - first: ', event.first, ' - last: ', event.last);
+    }
+
+    getCopyOfOptions() {
+        return JSON.parse(JSON.stringify(this.myDatePickerNormalOptions));
     }
 }

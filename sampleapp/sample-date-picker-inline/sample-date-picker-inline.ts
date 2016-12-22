@@ -1,106 +1,112 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-declare var require:any;
-const inlineSampleTpl: string = require('./sample-date-picker-inline.html');
+declare var require: any;
+const inlineSampleTpl: string = require("./sample-date-picker-inline.html");
 
 @Component({
-    selector: 'sample-date-picker-inline',
+    selector: "sample-date-picker-inline",
     template: inlineSampleTpl
 })
 
 export class SampleDatePickerInline implements OnInit {
 
     private myDatePickerInlineOptions = {
-        todayBtnTxt: 'Today',
-        dateFormat: 'yyyy-mm-dd',
-        firstDayOfWeek: 'mo',
+        todayBtnTxt: "Today",
+        dateFormat: "yyyy-mm-dd",
+        firstDayOfWeek: "mo",
         sunHighlight: true,
-        height: '34px',
-        width: '300px',
+        width: "300px",
         inline: true,
-        disableUntil: {year: 0, month: 0, day: 0},
-        disableDays: [{year: 0, month: 0, day: 0}]
+        disableUntil: { year: 0, month: 0, day: 0 },
+        disableDays: [{ year: 0, month: 0, day: 0 }]
     };
-    private selectedDateInline: string = '';
+    private selectedDateInline: Object = {};
 
-    private selectedTextInline: string = '';
-    private border: string = 'none';
-    private locale:string = '';
-    public arrSelectedDates: [{year:number, month: number, day: number}];
+    private selectedTextInline: string = "";
+    private border: string = "none";
+    private locale: string = "";
+    public arrSelectedDates: [{ year: number, month: number, day: number }];
 
-    private locales:Array<string> = new Array('en', 'fr', 'ja', 'fi', 'es', 'hu', 'sv', 'nl', 'ru', 'no', 'tr', 'pt-br', 'de');
-    
-    constructor() {}
+    private locales: Array<string> = new Array("en", "fr", "ja", "fi", "es", "hu", "sv", "nl", "ru", "no", "tr", "pt-br", "de", "it", "pl", "my");
 
     ngOnInit() {
-        console.log('onInit(): SampleDatePickerInline');
-        this.arrSelectedDates = [{year: 2016, month: 11, day: 30}];
+        console.log("onInit(): SampleDatePickerInline");
+        this.arrSelectedDates = [{ year: 2016, month: 11, day: 30 }];
     }
 
-    onChangeLocale(locale:string) {
+    onChangeLocale(locale: string) {
         this.locale = locale;
     }
 
-    onDisablePast(checked:boolean) {
+    onDisablePast(checked: boolean) {
         let date = new Date();
 
         // Disable/enable dates from 5th backward
         date.setDate(date.getDate() - 5);
 
         let copy = this.getCopyOfOptions();
-        copy.disableUntil = checked ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : {};
+        copy.disableUntil = checked ? { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() } : {};
         this.myDatePickerInlineOptions = copy;
     }
 
-    onDisableFuture(checked:boolean) {
+    onDisableFuture(checked: boolean) {
         let date = new Date();
 
         // Disable/enable dates from 5th forward
         date.setDate(date.getDate() + 5);
 
         let copy = this.getCopyOfOptions();
-        copy.disableSince = checked ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : {};
+        copy.disableSince = checked ? { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() } : {};
         this.myDatePickerInlineOptions = copy;
     }
 
-    onDisableSingleDates(checked:boolean) {
+    onDisableSingleDates(checked: boolean) {
         let date = new Date();
 
         // Disable/enable next month 1st and 3rd days
         let copy = this.getCopyOfOptions();
-        copy.disableDays = checked ? [{year: date.getFullYear(), month: date.getMonth() + 2, day: 1}, {year: date.getFullYear(), month: date.getMonth() + 2, day: 3}] : [];
+        copy.disableDays = checked ? [{ year: date.getFullYear(), month: date.getMonth() + 2, day: 1 }, { year: date.getFullYear(), month: date.getMonth() + 2, day: 3 }] : [];
         this.myDatePickerInlineOptions = copy;
     }
 
-    onDisableWeekends(checked:boolean) {
+    onDisableToday(checked: boolean) {
+        let date = new Date();
+
+        // Disable/enable today
+        let copy = this.getCopyOfOptions();
+        copy.disableDays = checked ? [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() }] : [];
+        this.myDatePickerInlineOptions = copy;
+    }
+
+    onDisableWeekends(checked: boolean) {
         // Disable/enable weekends
         let copy = this.getCopyOfOptions();
         copy.disableWeekends = checked;
         this.myDatePickerInlineOptions = copy;
     }
 
-    onMarkCurrentDay(checked:boolean) {
+    onMarkCurrentDay(checked: boolean) {
         // Mark current day
         let copy = this.getCopyOfOptions();
         copy.markCurrentDay = checked;
         this.myDatePickerInlineOptions = copy;
     }
 
-    onDateChanged(event:any) {
-        console.log('onDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
-        if(event.formatted !== '') {
-            this.selectedTextInline = 'Formatted: ' + event.formatted + ' - epoc timestamp: ' + event.epoc;
-            this.border = '1px solid #CCC';
+    onDateChanged(event: any) {
+        console.log("onDateChanged(): ", event.date, " - jsdate: ", new Date(event.jsdate).toLocaleDateString(), " - formatted: ", event.formatted, " - epoc timestamp: ", event.epoc);
+        if (event.formatted !== "") {
+            this.selectedTextInline = "Formatted: " + event.formatted + " - epoc timestamp: " + event.epoc;
+            this.border = "1px solid #CCC";
         }
         else {
-            this.selectedTextInline = '';
-            this.border = 'none';
+            this.selectedTextInline = "";
+            this.border = "none";
         }
     }
 
-    onMultiDateChanged(event:any) {
+    onMultiDateChanged(event: any) {
         console.log(event);
-        console.log('onMultiDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+        console.log("onMultiDateChanged(): ", event.date, " - formatted: ", event.formatted, " - epoc timestamp: ", event.epoc);
         this.arrSelectedDates = event.date;
     }
 

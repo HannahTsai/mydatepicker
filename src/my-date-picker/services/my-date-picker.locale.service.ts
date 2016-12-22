@@ -31,7 +31,7 @@ export class LocaleService {
             dayLabels: {su: "Su", mo: "Ma", tu: "Ti", we: "Ke", th: "To", fr: "Pe", sa: "La"},
             monthLabels: {1: "Tam", 2: "Hel", 3: "Maa", 4: "Huh", 5: "Tou", 6: "Kes", 7: "Hei", 8: "Elo", 9: "Syy", 10: "Lok", 11: "Mar", 12: "Jou"},
             dateFormat: "dd.mm.yyyy",
-            todayBtnTxt: "Tämä päivä",
+            todayBtnTxt: "Tänään",
             firstDayOfWeek: "mo",
             sunHighlight: true,
         },
@@ -106,6 +106,30 @@ export class LocaleService {
             todayBtnTxt: "Heute",
             firstDayOfWeek: "mo",
             sunHighlight: true
+        },
+        "it": {
+            dayLabels: { su: "Dom", mo: "Lun", tu: "Mar", we: "Mer", th: "Gio", fr: "Ven", sa: "Sab" },
+            monthLabels: { 1: "Gen", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mag", 6: "Giu", 7: "Lug", 8: "Ago", 9: "Set", 10: "Ott", 11: "Nov", 12: "Dic" },
+            dateFormat: "dd.mm.yyyy",
+            todayBtnTxt: "Oggi",
+            firstDayOfWeek: "mo",
+            sunHighlight: true
+        },
+        "pl": {
+            dayLabels: { su: "Nie", mo: "Pon", tu: "Wto", we: "Śro", th: "Czw", fr: "Pią", sa: "Sob" },
+            monthLabels: { 1: "Sty", 2: "Lut", 3: "Mar", 4: "Kwi", 5: "Maj", 6: "Cze", 7: "Lip", 8: "Sie", 9: "Wrz", 10: "Paź", 11: "Lis", 12: "Gru" },
+            dateFormat: "yyyy-mm-dd",
+            todayBtnTxt: "Dzisiaj",
+            firstDayOfWeek: "mo",
+            sunHighlight: true,
+        },
+        "my": {
+            dayLabels: {su: "တနင်္ဂနွေ", mo: "တနင်္လာ", tu: "အင်္ဂါ", we: "ဗုဒ္ဓဟူး", th: "ကြသပတေး", fr: "သောကြာ", sa: "စနေ"},
+            monthLabels: { 1: "ဇန်နဝါရီ", 2: "ဖေဖော်ဝါရီ", 3: "မတ်", 4: "ဧပြီ", 5: "မေ", 6: "ဇွန်", 7: "ဇူလိုင်", 8: "ဩဂုတ်", 9: "စက်တင်ဘာ", 10: "အောက်တိုဘာ", 11: "နိုဝင်ဘာ", 12: "ဒီဇင်ဘာ" },
+            dateFormat: "yyyy-mm-dd",
+            todayBtnTxt: "ယနေ့",
+            firstDayOfWeek: "mo",
+            sunHighlight: true,
         }
     };
 

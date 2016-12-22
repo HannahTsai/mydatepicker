@@ -6,6 +6,7 @@ export interface IMyOptions {
     dayLabels?: IMyDayLabels;
     monthLabels?: IMyMonthLabels;
     dateFormat?: string;
+    showTodayBtn?: boolean;
     todayBtnTxt?: string;
     firstDayOfWeek?: string;
     sunHighlight?: boolean;
@@ -21,8 +22,11 @@ export interface IMyOptions {
     alignSelectorRight?: boolean;
     indicateInvalidDate?: boolean;
     showDateFormatPlaceholder?: boolean;
+    customPlaceholderTxt?: string;
+    editableDateField?: boolean;
     editableMonthAndYear?: boolean;
     minYear?: number;
     maxYear?: number;
     componentDisabled?: boolean;
+    inputValueRequired?: boolean;
 }

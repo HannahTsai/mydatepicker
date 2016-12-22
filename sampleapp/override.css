@@ -1,6 +1,4 @@
 .mydp .selectedday div {
-    border: 1px solid #59b8da;
-    background-color:#59b8da !important;
     color: #ffffff;
     border-radius: 50%;
     height: 30px;
@@ -15,6 +13,7 @@
     height: 30px;
     padding: 5px;
 }
+
 
 .mydp .weekdaytitle {
     background-color: #394857;
@@ -35,3 +34,16 @@
 .mydp .headermonthtxt span, .mydp .headeryeartxt span, .mydp .headertodaybtn {
     font-weight: bold;
 }
+
+
+.mydp,
+.mydp .selectiongroup,
+.mydp .selection,
+.mydp .selector {
+    border-radius: 4px;
+}
+
+.mydp .btnpicker {
+    border-radius: 0 4px 4px 0;
+}
+*/
