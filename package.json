@@ -2,7 +2,6 @@
   "name": "mydatepicker",
   "version": "1.1.5",
   "description": "Angular2 date picker",
-  "main": "dist/my-date-picker.module.js",
   "keywords": [
     "Angular2",
     "datepicker",
